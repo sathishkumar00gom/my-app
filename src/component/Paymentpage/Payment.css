@@ -1,0 +1,27 @@
+.cad:hover {
+  background-color: black;
+  color: white
+}
+
+.ids:hover {
+  position: relative;
+  animation: myfirst 5s linear 2s infinite alternate;
+}
+
+@keyframes myfirst {
+  0% {
+    width: 100%;
+  }
+  25% {
+    width: 50%;
+  }
+  50% {
+    width: 75%;
+  }
+  75% {
+    width: 100%;
+  }
+  100% {
+    width: 25%;
+  }
+}

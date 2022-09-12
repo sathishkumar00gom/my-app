@@ -1,0 +1,76 @@
+  const [color, setcolor] = useState<boolean | any>(false);
+
+  const [formSummit, setForm] = useState<Formstate>({
+    moviename: "",
+    img: "",
+  });
+  const [toprated, setToprated] = useState<boolean>(false);
+  const [value, setValue] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const movie = useSelector((state: RootState) => state.movies.movies);
+  const navigate = useNavigate();
+  const [unauthuser, setUnAuthuser] = useState<boolean>(false);
+  console.log(movie, "movie");
+
+  useEffect(() => {
+    dispatch(fetchmovies());
+  }, []);
+
+  const handleDelete = (id: string) => {
+    authuser() ? dispatch(deletemovies(id)) : setUnAuthuser(true);
+  };
+  // const Context = createContext(null);
+
+  const handleAdd = () => {
+    authuser() ? setValue(true) : setUnAuthuser(true);
+  };
+
+  const handleChange = (e: any) => {
+    setForm({ ...formSummit, [e.target.name]: e.target.value });
+  };
+
+  const handledata = () => {
+    dispatch(addmovies(formSummit));
+  };
+
+  const formHandleSubmit = () => {};
+
+  const editdata = (id: any, main: {}) => {
+    authuser()
+      ? navigate(`./edit/${id}`, { state: main })
+      : setUnAuthuser(true);
+  };
+
+  const authuser: any = () => {
+    const getuser = localStorage.getItem("user");
+    const getuserdetail = JSON.parse(getuser || "{}");
+    console.log(getuserdetail[0]?.email, "getuserdetail");
+    let check = getuserdetail[0]?.email ? true : false;
+    return check;
+  };
+
+  const handleView = useCallback((id: any, main: {}) => {
+    console.log(authuser(), "authuser");
+    authuser()
+      ? navigate(`./view/${id}`, { state: main })
+      : setUnAuthuser(true);
+  }, []);
+
+  const handleClose = () => {
+    setUnAuthuser(false);
+  };
+
+  const handleLogin = () => {
+    navigate("./login");
+  };
+
+  const handlecolor = () => {
+    setcolor(true);
+  };
+  const handlecolor2 = () => {
+    setcolor(false);
+  };
+
+  const handleClick = () => {
+    setToprated(true);
+  };

@@ -1,0 +1,13 @@
+.div {
+  background-color: black;
+  opacity: 0.9;
+  padding: 50px 20px;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: white;
+}

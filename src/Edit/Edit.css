@@ -1,0 +1,13 @@
+.editdiv {
+  text-align: center;
+  color: white;
+  background-color: black;
+  opacity: 0.9;
+  padding: 50px 20px;
+}
+.wel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
