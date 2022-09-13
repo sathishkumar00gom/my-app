@@ -6,12 +6,14 @@ export interface CounterState {
   movies: [];
   users: [];
   movies2: [];
+  cards: [];
 }
 
 const initialState: CounterState = {
   movies: [],
   users: [],
   movies2: [],
+  cards: [],
 };
 
 export const fetchmovies: any = () => async (dispatch: any) => {
@@ -65,6 +67,12 @@ export const editmovies = (data: any) => async (dispatch: any) => {
     .catch((err) => console.log(err));
 };
 
+export const fetchcards = () => async (dispatch: any) => {
+  await axios.get("http://localhost:3000/cards")
+  .then((res)=>dispatch(getcards(res.data)))
+  .catch((err)=>console.log(err))
+};
+
 export const counterSlice = createSlice({
   name: "movies",
   initialState,
@@ -78,6 +86,9 @@ export const counterSlice = createSlice({
     getmovies2: (state, { payload }) => {
       state.movies2 = payload;
     },
+    getcards:(state,{payload})=>{
+      state.cards=payload;
+    }
   },
   // extraReducers: {
   //   extraReducers: (builder) => {
@@ -99,6 +110,6 @@ export const counterSlice = createSlice({
   //   },
 });
 
-const { getMovies, loginusers, getmovies2 } = counterSlice.actions;
+const { getMovies, loginusers, getmovies2,getcards } = counterSlice.actions;
 
 export const moviessReducer = counterSlice.reducer;

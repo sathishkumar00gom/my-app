@@ -5,7 +5,7 @@ import Carosel from "../Carosel";
 import Questioncomponent from "../Questioncomponent";
 
 const Apiloader1 = lazy(() => import("../Apicomponents/Toppicks/Toppicks"));
-const Apiloader2 = lazy(() => import("../Apicomponents/Toprate"));
+const Apiloader2 = lazy(() => import("../Apicomponents/Toprate"));  
 
 const Data = () => {
   const [toppicks, setToppicks] = useState<boolean>(false);

@@ -31,7 +31,7 @@ const Login = () => {
       console.log(getuserdetail[0]?.email, "getuserdetail");
       console.log(values, "valuess");
 
-      if (Admin(getuser, values)) {
+      if (Admin(getuserdetail, values)) {
         dispatch(postloginusers(values));
         navigate("/admin");
       } else if (
@@ -40,8 +40,6 @@ const Login = () => {
       ) {
         dispatch(postloginusers(values));
         navigate("/");
-      } else {
-        setError("Invalid user");
       }
     },
   });

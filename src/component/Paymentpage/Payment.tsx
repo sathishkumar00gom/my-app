@@ -1,23 +1,41 @@
 import { Form } from "react-bootstrap";
 import React, { useRef, useState } from "react";
 import { Card, Table, Button, Modal } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Payment.css";
 
 const Payment = () => {
+  const navigate = useNavigate();
   const [value, setValue] = useState<any>("");
   const [popup, setPopup] = useState<boolean>(false);
+  const [mynum, setMynum] = useState<any>({});
+  const [error, setError] = useState<string>("");
   const location: any = useLocation();
   const state = location.state;
 
-  const inputRef: any = useRef(null);
+  const inputRef: any = useRef();
 
   const handleClick = () => {
     setPopup(true);
   };
 
   const handleSubmit = () => {
-    console.log(inputRef.current.value);
+    if (inputRef.current.value.length !== 10) {
+      setError("!pls enter a valid number");
+    }
+    if (inputRef.current.value.length === 10) {
+      navigate("/paymethods");
+    }
+  };
+
+  const handleChange = (e: any) => {
+    setMynum(e.target.value);
+    if (inputRef.current.value.length !== 10) {
+      setError("!pls enter a valid number");
+    }
+    if (inputRef.current.value.length === 10) {
+      setError("");
+    }
   };
 
   return (
@@ -103,14 +121,16 @@ const Payment = () => {
                   <Modal.Title>Login to Continue</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <Form onSubmit={handleSubmit}>
+                  <Form>
                     <Form.Control
+                      className={`${error ? "border border-danger" : ""}`}
                       ref={inputRef}
                       type="number"
                       placeholder="enter you mobile number"
-                      onChange={(e) => e.target.value}
-                      value={inputRef}
+                      onChange={handleChange}
+                      value={mynum}
                     />
+                    {error && <p className="text-danger">{error}</p>}
                   </Form>
                 </Modal.Body>
                 <Modal.Footer>
@@ -123,12 +143,11 @@ const Payment = () => {
                     Close
                   </Button>
                   <Button
+                    type="submit"
                     variant="primary"
-                    onClick={() => {
-                      setPopup(false);
-                    }}
+                    onClick={handleSubmit}
                   >
-                    Save Changes
+                    Continue
                   </Button>
                 </Modal.Footer>
               </Modal>

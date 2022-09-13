@@ -2,7 +2,9 @@ import { url } from "inspector";
 import React from "react";
 import { Button, Card } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
+import Ratings from "../component/Ratings/Ratings";
 import "./View.css";
+
 
 const View = () => {
   const navigate = useNavigate();
@@ -29,13 +31,15 @@ const View = () => {
           <img className="img-fluid" src={state?.img} />
         </Card>
         <Button
-          className="btn btn-info d-flex justify-content-center mt-5 mx-auto"
+          className="btn btn-info d-flex justify-content-center mt-2 mx-auto"
           onClick={() => {
             navigate("/payment", { state: state });
           }}
         >
           Watch Now
         </Button>
+        
+        <Ratings  />
       </div>
     </div>
   );

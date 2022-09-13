@@ -9,6 +9,9 @@ import Edit from "./Edit/Edit";
 import View from "./Home/View";
 import User from "./User/User";
 import Payment from "./component/Paymentpage/Payment";
+import Paymethods from "./component/Paymethods/Paymethods";
+import Carddetails from "./component/Carddetails/Carddetails";
+import Paymentsuccess from "./component/paymentsuccess/Paymentsuccess";
 
 function App() {
   return (
@@ -20,7 +23,10 @@ function App() {
         <Route path="/" element={<User />} />
         <Route path="/admin/edit/:id" element={<Edit />} />
         <Route path="/:id" element={<View />} />
-        <Route path="/payment" element={<Payment/>}/>
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/paymethods" element={<Paymethods />} />
+        <Route path="/carddetails/:id" element={<Carddetails />} />
+        <Route path="/Paymentsuccess" element={<Paymentsuccess />} />
       </Routes>
     </Router>
   );
