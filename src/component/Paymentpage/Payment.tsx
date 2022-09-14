@@ -24,7 +24,8 @@ const Payment = () => {
       setError("!pls enter a valid number");
     }
     if (inputRef.current.value.length === 10) {
-      navigate("/paymethods");
+      navigate("/otpcode")
+     
     }
   };
 

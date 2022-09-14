@@ -11,7 +11,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 
-const style = {
+export const style = {
   position: "absolute",
   top: "50%",
   left: "50%",

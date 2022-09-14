@@ -16,9 +16,21 @@ const Paymethods = () => {
     dispatch(fetchcards());
   }, []);
 
+  const handlesub = (id: any) => {
+    if (id === 1 || id === 2 || id === 3) {
+      navigate(`/carddetails/${id}`);
+    }
+    if (id === 4) {
+      navigate(`/googlepay/${id}`);
+    }
+    if (id === 5) {
+      navigate(`/phonepay/${id}`);
+    }
+  };
+
   return (
     <>
-      <div className="bg-white vh-100">
+      <div className="bg-white">
         <div className="row">
           <div className="col-lg-2"></div>
           <div className="col-lg-8">
@@ -27,16 +39,14 @@ const Paymethods = () => {
               cards.map((card: any) => {
                 return (
                   <Card
-                    style={{ height: "8rem" }}
+                    style={{ height: "9rem" }}
                     className="shadow-lg mt-2"
-                    onClick={() => {
-                      navigate(`/carddetails/${card.id}`);
-                    }}
+                    onClick={() => handlesub(card.id)}
                   >
-                    <div className="row mt-2">
+                    <div className="row">
                       <div className="col-lg-6 mt-3 fw-bold d-flex justify-content-center">
                         {" "}
-                        {card.cardname}
+                        <p className="">{card.cardname}</p>
                       </div>
                       <div className="col-lg-6 d-flex justify-content-center">
                         <img style={{ width: "150px" }} src={card.Cardlogo1} />

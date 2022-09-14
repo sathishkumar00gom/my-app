@@ -23,12 +23,12 @@ const Questioncomponent = () => {
         >
           Frequently Asked Questions
         </h1>
-        <Question maintext="what is Netflix?" />
-        <Question maintext="How much does Netflix Cost?" />
-        <Question maintext="Where can i Watch?" />
-        <Question maintext="How do I Cancel" />
-        <Question maintext="What can I watch on Netflix?" />
-        <Question maintext="Is Netflix is Good for Kids" />
+        <Question maintext="what is Netflix?" id="1" />
+        <Question maintext="How much does Netflix Cost?" id="2" />
+        <Question maintext="Where can i Watch?" id="3" />
+        <Question maintext="How do I Cancel" id="4" />
+        <Question maintext="What can I watch on Netflix?" id="5" />
+        <Question maintext="Is Netflix is Good for Kids" id="6" />
 
         <div>
           <p

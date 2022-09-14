@@ -24,6 +24,7 @@ const Paymentsuccess = () => {
           >
             Go to Home Page
           </Button>
+          <p className="fw-bold">Enjoy the Netflix</p>
         </div>
         <div className="col-6">
           {" "}

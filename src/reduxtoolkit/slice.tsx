@@ -7,6 +7,7 @@ export interface CounterState {
   users: [];
   movies2: [];
   cards: [];
+  answers: [];
 }
 
 const initialState: CounterState = {
@@ -14,6 +15,7 @@ const initialState: CounterState = {
   users: [],
   movies2: [],
   cards: [],
+  answers: [],
 };
 
 export const fetchmovies: any = () => async (dispatch: any) => {
@@ -68,9 +70,16 @@ export const editmovies = (data: any) => async (dispatch: any) => {
 };
 
 export const fetchcards = () => async (dispatch: any) => {
-  await axios.get("http://localhost:3000/cards")
-  .then((res)=>dispatch(getcards(res.data)))
-  .catch((err)=>console.log(err))
+  await axios
+    .get("http://localhost:3000/cards")
+    .then((res) => dispatch(getcards(res.data)))
+    .catch((err) => console.log(err));
+};
+export const fetchanswer = () => async (dispatch: any) => {
+  await axios
+    .get("http://localhost:3000/answers")
+    .then((res) => dispatch(getanswer(res.data)))
+    .catch((err: any) => console.log(err));
 };
 
 export const counterSlice = createSlice({
@@ -86,9 +95,12 @@ export const counterSlice = createSlice({
     getmovies2: (state, { payload }) => {
       state.movies2 = payload;
     },
-    getcards:(state,{payload})=>{
-      state.cards=payload;
-    }
+    getcards: (state, { payload }) => {
+      state.cards = payload;
+    },
+    getanswer: (state, { payload }) => {
+      state.answers = payload;
+    },
   },
   // extraReducers: {
   //   extraReducers: (builder) => {
@@ -110,6 +122,7 @@ export const counterSlice = createSlice({
   //   },
 });
 
-const { getMovies, loginusers, getmovies2,getcards } = counterSlice.actions;
+const { getMovies, loginusers, getmovies2, getcards, getanswer } =
+  counterSlice.actions;
 
 export const moviessReducer = counterSlice.reducer;

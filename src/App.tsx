@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { Children, createContext } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Login from "./login/Login";
@@ -12,6 +12,11 @@ import Payment from "./component/Paymentpage/Payment";
 import Paymethods from "./component/Paymethods/Paymethods";
 import Carddetails from "./component/Carddetails/Carddetails";
 import Paymentsuccess from "./component/paymentsuccess/Paymentsuccess";
+import Childrens from "./component/children/Childrens";
+import Language from "./component/Language";
+import Phonepay from "./component/Phonepay";
+import Googlepay from "./component/Googlepay";
+import Otpcode from "./component/otpcode/Otpcode";
 
 function App() {
   return (
@@ -27,6 +32,11 @@ function App() {
         <Route path="/paymethods" element={<Paymethods />} />
         <Route path="/carddetails/:id" element={<Carddetails />} />
         <Route path="/Paymentsuccess" element={<Paymentsuccess />} />
+        <Route path="/children" element={<Childrens />} />
+        <Route path="/children" element={<Language />} />
+        <Route path="/phonepay/:id" element={<Phonepay />} />
+        <Route path="/googlepay/:id" element={<Googlepay />} />
+        <Route path="/otpcode" element={<Otpcode/>}/>
       </Routes>
     </Router>
   );
