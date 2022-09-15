@@ -1,12 +1,14 @@
-.cad:hover {
-  background-color: black;
+/* .cad:hover {
+  background-color: blue;
   color: white
 }
 
 .ids:hover {
   position: relative;
   animation: myfirst 5s linear 2s infinite alternate;
-}
+} */
+
+
 
 @keyframes myfirst {
   0% {

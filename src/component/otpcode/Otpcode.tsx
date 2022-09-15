@@ -1,68 +1,73 @@
 import React, { useEffect, useRef, useState } from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Modal, Box, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { style } from "../Carddetails/Carddetails";
 
 const Otpcode = () => {
+  const [nav, setnav] = useState<boolean>(false);
   const notify = () => toast("Wow so easy!");
   const navigate = useNavigate();
   const [otp, setOtp] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
+  const [dupotp, setDupotp] = useState<boolean>(false);
   const formik = useFormik({
     initialValues: {
       otpcode: "",
     },
-    onSubmit: (values: any) => {
+    onSubmit: (values) => {
       handlenumber();
-      if (!otp) {
-        handleout();
-      }
+      // if (!otp) {
+      //   handleout();
+      // }
     },
   });
 
-  const textref: any = useRef();
+  const textref = useRef<HTMLInputElement>();
 
   const total = Number(textref.current?.value);
 
-  let randomenumber = Math.random() * 10;
-  let round = Math.floor(randomenumber);
-  console.log(round, "round");
+  const randomenumber = Math.random() * 100 + 1;
+  const round = Math.floor(randomenumber);
+
+  const evenround = round % 2 === 0;
+
   const values = () => {
-    if (
-      round === 0 ||
-      round === 1 ||
-      round === 2 ||
-      round === 3 ||
-      round === 4 ||
-      round === 5
-    ) {
+    if (evenround) {
       return values;
     }
   };
 
-  //   useEffect(()=>{
-  //     navigate("/paymethods")
-  //   },[])
+  const navPage = () => {
+    setTimeout(() => {
+      return handleout();
+    }, 5000);
+  };
 
-  let sumtotal = total === 12345;
+  const timeup = () => {
+    setTimeout(() => {
+      handleout();
+    }, 7000);
+  };
 
   const handlenumber = () => {
-    console.log(round, "rods");
-    if (sumtotal && values()) {
+    console.log(round, "even");
+    if (values()) {
       setValue("Invalid otp");
+      setDupotp(true);
+      timeup();
     } else {
       setOtp(true);
       setValue("");
       toast("OTP number is correct");
+      timeup()
     }
   };
   const handleout = () => {
     navigate("/paymethods");
   };
-
-  
 
   return (
     <>
@@ -88,7 +93,28 @@ const Otpcode = () => {
           </Button>
         </form>
       </div>
-      {otp ? <ToastContainer />:""}
+      {otp && <ToastContainer /> }
+      {dupotp && (
+        <Modal
+          open={dupotp}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              className="text-danger fw-bold"
+            >
+              you are entering wrong otp
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              check your phone or email to get another otp code
+            </Typography>
+          </Box>
+        </Modal>
+      )}
       {}
     </>
   );

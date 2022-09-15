@@ -3,12 +3,14 @@ import axios from "axios";
 
 export interface Shows {
   popularshows: [];
-  Moviesrecommendedforyou:[];
+  Moviesrecommendedforyou: [];
+  Top10TrendingMovies: [];
 }
 
 const initialState: Shows = {
   popularshows: [],
-  Moviesrecommendedforyou:[]
+  Moviesrecommendedforyou: [],
+  Top10TrendingMovies: [],
 };
 
 export const fetchpopularshows = () => async (dispatch: any) => {
@@ -25,6 +27,13 @@ export const fetchMoviesrecommendedforyou = () => async (dispatch: any) => {
     .catch((err) => console.log(err));
 };
 
+export const fetchTop10TrendingMovies = () => async (dispatch: any) => {
+  await axios
+    .get("http://localhost:3000/Top10TrendingMovies")
+    .then((res) => dispatch(gettoptenmovies(res.data)))
+    .catch((err) => console.log(err));
+};
+
 export const polularshowsslice = createSlice({
   name: "popularmovies",
   initialState,
@@ -33,10 +42,14 @@ export const polularshowsslice = createSlice({
       state.popularshows = payload;
     },
     getpMoviesrecommendedforyou: (state, { payload }) => {
-        state.Moviesrecommendedforyou = payload;
-      }
+      state.Moviesrecommendedforyou = payload;
+    },
+    gettoptenmovies: (state, { payload }) => {
+      state.Top10TrendingMovies = payload;
+    },
   },
 });
 
-const {getpopularshows,getpMoviesrecommendedforyou} = polularshowsslice.actions;
+const { getpopularshows, getpMoviesrecommendedforyou, gettoptenmovies } =
+  polularshowsslice.actions;
 export const popularReducer = polularshowsslice.reducer;

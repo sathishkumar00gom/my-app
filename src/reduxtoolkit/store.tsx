@@ -5,7 +5,7 @@ import { moviessReducer } from "./slice";
 export const store = configureStore({
   reducer: {
     movies: moviessReducer,
-    popularshows:popularReducer
+    popularshows: popularReducer,
   },
 });
 

@@ -18,28 +18,28 @@ const initialState: CounterState = {
   answers: [],
 };
 
-export const fetchmovies: any = () => async (dispatch: any) => {
+export const fetchmovies = () => async (dispatch: any) => {
   await axios
     .get("http://localhost:3000/employees")
     .then((res) => dispatch(getMovies(res.data)))
     .catch((err) => console.log(err));
 };
 
-export const fetchmovies2: any = () => async (dispatch: any) => {
+export const fetchmovies2 = () => async (dispatch: any) => {
   console.log("hellohs");
   await axios
     .get("http://localhost:3000/movies")
     .then((res) => dispatch(getmovies2(res.data)))
     .catch((err) => console.log(err.msg));
 };
-export const deletemovies: any = (id: any) => async (dispatch: any) => {
+export const deletemovies= (id: string) => async (dispatch: any) => {
   await axios
     .delete(`http://localhost:3000/employees/${id}`)
     .then((res) => console.log(res.data))
     .catch((err) => console.log(err));
 };
 
-export const addmovies: any = (storemovie: any) => async (dispatch: any) => {
+export const addmovies= (storemovie: any) => async (dispatch: any) => {
   console.log(storemovie, "storemovie");
   await axios
     .post("http://localhost:3000/employees", storemovie)
@@ -47,7 +47,7 @@ export const addmovies: any = (storemovie: any) => async (dispatch: any) => {
     .catch((err: any) => console.log(err));
 };
 
-export const postloginusers: any = (values: any) => async (dispatch: any) => {
+export const postloginusers= (values: any) => async (dispatch: any) => {
   await axios
     .post("http://localhost:3007/login", values)
     .then((res: any) => {
@@ -101,25 +101,7 @@ export const counterSlice = createSlice({
     getanswer: (state, { payload }) => {
       state.answers = payload;
     },
-  },
-  // extraReducers: {
-  //   extraReducers: (builder) => {
-  //     builder.addCase(fetchmovies.pending, (state:any) => {
-  //       state. movies = [];
-  //         state.loading = "loading";
-  //     });
-  //     builder.addCase(
-  //       fetchmovies.fulfilled, (state:any, { payload }:any) => {
-  //           state. movies = payload;
-  //           state.loading = "loaded";
-  //     });
-  //     builder.addCase(
-  //       fetchmovies.rejected,(state:any, action:any) => {
-  //           state.loading = "error";
-  //           state.error = action.error.message;
-  //     });
-  //  }
-  //   },
+  }
 });
 
 const { getMovies, loginusers, getmovies2, getcards, getanswer } =

@@ -17,6 +17,7 @@ import Language from "./component/Language";
 import Phonepay from "./component/Phonepay";
 import Googlepay from "./component/Googlepay";
 import Otpcode from "./component/otpcode/Otpcode";
+import Shows from "./component/Shows/Shows";
 
 function App() {
   return (
@@ -33,10 +34,11 @@ function App() {
         <Route path="/carddetails/:id" element={<Carddetails />} />
         <Route path="/Paymentsuccess" element={<Paymentsuccess />} />
         <Route path="/children" element={<Childrens />} />
-        <Route path="/children" element={<Language />} />
+        <Route path="/language" element={<Language />} />
         <Route path="/phonepay/:id" element={<Phonepay />} />
         <Route path="/googlepay/:id" element={<Googlepay />} />
-        <Route path="/otpcode" element={<Otpcode/>}/>
+        <Route path="/otpcode" element={<Otpcode />} />
+        <Route path="/shows" element={<Shows/>}/>
       </Routes>
     </Router>
   );

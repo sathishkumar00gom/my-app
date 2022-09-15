@@ -102,7 +102,7 @@ const Googlepay = () => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              you don't have a enough money in your bank
+              you dont have a enough money in your bank
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               Kindly make sure enough money to subscribe

@@ -5,6 +5,7 @@ import {
   Modal,
   Typography,
   Box,
+  CircularProgress,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useFormik } from "formik";
@@ -52,16 +53,22 @@ const Carddetails = () => {
     const number = Math.random();
     const correctnumber = Math.floor(number * 10);
     console.log(correctnumber, "randomenumber");
-    if (correctnumber === 1 || correctnumber === 10 || correctnumber === 8 || correctnumber === 6) {
+    if (
+      correctnumber === 1 ||
+      correctnumber === 10 ||
+      correctnumber === 8 ||
+      correctnumber === 6 ||
+      correctnumber === 3
+    ) {
       navigate("/paymentsuccess");
     }
-    if (correctnumber === 2 || correctnumber === 3 || correctnumber === 4) {
+    if (correctnumber === 2 || correctnumber === 4) {
       setpayment(true);
-      setTime()
+      setTime();
     }
     if (correctnumber === 5 || correctnumber === 7 || correctnumber === 9) {
       setBank(true);
-      setTime()
+      setTime();
     }
   };
 
@@ -71,12 +78,12 @@ const Carddetails = () => {
     }, 5000);
   };
 
-  const setTime=()=>{
+  const setTime = () => {
     return setTimeout(() => {
-        setpayment(false)
-        setBank(false)
-      }, 10000);
-  }
+      setpayment(false);
+      setBank(false);
+    }, 10000);
+  };
 
   return (
     <div className="bg-white vh-100 d-flex flex-column justify-content-center align-items-center">
@@ -143,7 +150,7 @@ const Carddetails = () => {
           >
             <Box sx={style}>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                you don't have a enough money in your bank
+                you dont have a enough money in your bank
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 Kindly make sure enough money to subscribe
@@ -157,13 +164,14 @@ const Carddetails = () => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>
+            <Box sx={style} className="loaders">
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Wait!
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 You payment is processing
               </Typography>
+              <CircularProgress />
             </Box>
           </Modal>
         )}

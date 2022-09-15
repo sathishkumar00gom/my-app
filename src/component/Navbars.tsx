@@ -20,7 +20,7 @@ interface Classnames {
 }
 
 const Navbars: React.FC<Classnames> = (props: Classnames) => {
-  const [buttonhidden, setButtonhidden] = useState<boolean>(false);
+  const [buttonhidden, setButtonhidden] = useState<boolean>(true);
   const [popup, setPopup] = useState<boolean>(false);
   const navigate = useNavigate();
 

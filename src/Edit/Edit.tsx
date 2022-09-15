@@ -4,18 +4,25 @@ import "./Edit.css";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { editmovies } from "../reduxtoolkit/slice";
+import { AppDispatch } from "../reduxtoolkit/store";
 
 interface editvalue {
   id: number;
   moviename: string;
   img: string;
 }
+
+interface LocationState {
+    id: number;
+    img: string;
+    moviename: string;
+}
 const Edit = () => {
   const navigate = useNavigate();
-  const location: any = useLocation();
-  const value = location.state;
-  const dispatch: any = useDispatch();
-  console.log(value, "values");
+  const location = useLocation();
+  const value = location.state as LocationState;
+  const dispatch: AppDispatch = useDispatch();
+  console.log(location, "values");
 
   const { moviename, img, id } = value;
   const [newData] = useState<editvalue>({
@@ -31,11 +38,11 @@ const Edit = () => {
 
   console.log(data, "dededed");
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (data: {}) => {
+  const handleSubmit = (data: editvalue) => {
     console.log(id, "idsdsdsds");
     dispatch(editmovies(data));
     navigate("/");

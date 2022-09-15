@@ -2,14 +2,20 @@ import React, { useEffect, useState } from "react";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchanswer } from "../reduxtoolkit/slice";
-import { RootState } from "../reduxtoolkit/store";
+import { AppDispatch, RootState } from "../reduxtoolkit/store";
 interface Myprops {
   maintext: string;
   id: string;
 }
 
+interface Question{
+  Qus:string;
+  id:string;
+  answer:string;
+}
+
 const Question: React.FC<Myprops> = (props: Myprops) => {
-  const dispatch: any = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const [answer, setAnswer] = useState<boolean>(false);
 
   useEffect(() => {
@@ -19,7 +25,7 @@ const Question: React.FC<Myprops> = (props: Myprops) => {
   const answers = useSelector((state: RootState) => state.movies.answers);
   console.log(answers, "answ");
 
-  const handleOpen = (id: any) => {
+  const handleOpen = (id: string) => {
     setAnswer(!answer);
     console.log(id, "ids");
   };
@@ -35,8 +41,8 @@ const Question: React.FC<Myprops> = (props: Myprops) => {
         boxShadow: "10px 20px 50px black",
       }}
     >
-      {/* {answers &&
-        answers.map((ans: any) => {
+      {answers &&
+        answers.map((ans: Question) => {
           return (
             <>
               <h1>{ans.Qus}</h1>
@@ -53,7 +59,7 @@ const Question: React.FC<Myprops> = (props: Myprops) => {
               )}
             </>
           );
-        })} */}
+        })}
     </div>
   );
 };

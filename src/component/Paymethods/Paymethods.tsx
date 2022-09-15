@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
 import { fetchcards } from "../../reduxtoolkit/slice";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../reduxtoolkit/store";
+import { AppDispatch, RootState } from "../../reduxtoolkit/store";
 import { Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
+interface Cards{
+  id:number,
+  cardname:string,
+Cardlogo1:string
+}
+
 const Paymethods = () => {
   const navigate = useNavigate();
-  const dispatch: any = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   const cards = useSelector((state: RootState) => state.movies.cards);
   console.log(cards, "cards");
@@ -16,7 +22,7 @@ const Paymethods = () => {
     dispatch(fetchcards());
   }, []);
 
-  const handlesub = (id: any) => {
+  const handlesub = (id: number) => {
     if (id === 1 || id === 2 || id === 3) {
       navigate(`/carddetails/${id}`);
     }
@@ -36,9 +42,9 @@ const Paymethods = () => {
           <div className="col-lg-8">
             <h1 className="fw-bold text-center mt-5">Premium Plan</h1>
             {cards &&
-              cards.map((card: any) => {
+              cards.map((card: Cards) => {
                 return (
-                  <Card
+                  <Card key={card.id}
                     style={{ height: "9rem" }}
                     className="shadow-lg mt-2"
                     onClick={() => handlesub(card.id)}

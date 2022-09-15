@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchmovies2 } from "../../reduxtoolkit/slice";
-import { RootState } from "../../reduxtoolkit/store";
+import { AppDispatch, RootState } from "../../reduxtoolkit/store";
+import {Main} from "../../User/User"
 
 const Toprate = () => {
-  const dispatch = useDispatch();
+  const dispatch:AppDispatch = useDispatch();
   const movies2 = useSelector((state: RootState) => state.movies.movies2);
 
   useEffect(() => {
@@ -15,9 +16,9 @@ const Toprate = () => {
     <>
       <h1 className="text-white">Top Rated Orignals</h1>
       {movies2 &&
-        movies2.map((get: any) => {
+        movies2.map((get: Main) => {
           return (
-            <div className="col-lg-4 col-md-6 mt-5">
+            <div className="col-lg-4 col-md-6 mt-5" key={get.id}>
               <Card
                 style={{
                   width: "18rem",
@@ -32,19 +33,19 @@ const Toprate = () => {
                   <div className="d-flex flex-column">
                     <Button
                       variant="primary mt-2"
-                      //   onClick={() => handleView(main.id, main)}
+                      
                     >
                       View
                     </Button>
                     <Button
                       variant="danger mt-2"
-                      //   onClick={() => handleDelete(main.id)}
+                    
                     >
                       Delete
                     </Button>
                     <Button
                       variant="warning mt-2"
-                      //   onClick={() => editdata(main.id, main)}onClick={handleAdd}
+                    
                     >
                       Edit
                     </Button>

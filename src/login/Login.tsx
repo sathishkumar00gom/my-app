@@ -7,9 +7,15 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { postloginusers } from "../reduxtoolkit/slice";
 import { Admin } from "../Utilise/Adminuser";
+import { AppDispatch } from "../reduxtoolkit/store";
+
+export interface Values{
+  email:string;
+  password:string;
+}
 
 const Login = () => {
-  const dispatch = useDispatch();
+  const dispatch :AppDispatch= useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState<string>("");
 
@@ -25,7 +31,7 @@ const Login = () => {
         .required("Required"),
     }),
 
-    onSubmit: (values: any) => {
+    onSubmit: (values: Values) => {
       const getuser = localStorage.getItem("user");
       const getuserdetail = JSON.parse(getuser || "{}");
       console.log(getuserdetail[0]?.email, "getuserdetail");

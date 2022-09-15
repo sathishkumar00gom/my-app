@@ -40,7 +40,7 @@ axios.interceptors.response.use(
       ) {
         try {
           console.log("okay", err.response.data.message);
-          let refresh = TokenService.getRefreshToken();
+          const refresh = TokenService.getRefreshToken();
           console.log("1 hour refresh", refresh);
           const res = await axios.post("http://localhost:3007/refresh", {
             "x-access-token": refresh,
@@ -51,12 +51,17 @@ axios.interceptors.response.use(
           axios.defaults.headers.common["x-access-token"] =
             res?.data?.data?.token;
           return axios(originalConfig);
-        } catch (_error) {
-          return Promise.reject(_error);
+        } catch (error: any) {
+          console.log("ref error", error);
+          if (error.response.data.status === "Refresh token expired") {
+            localStorage.clear();
+            window.location.pathname = "/login";
+            return error.response.data;
+          }
         }
       }
+      return Promise.reject(err);
     }
-    return Promise.reject(err);
   }
 );
 
@@ -68,7 +73,7 @@ root.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>
-    //{" "}
+    
   </Provider>
 );
 

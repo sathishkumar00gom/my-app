@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, Modal } from "react-bootstrap";
 import Extra from "../component/Extra";
 import Footer from "../component/Footer";
 import Navbars from "../component/Navbars";
-import { Values } from "../component/Apicomponents/Toppicks/Toppicks";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../reduxtoolkit/store";
 import { fetchmovies } from "../reduxtoolkit/slice";
@@ -17,6 +16,7 @@ import {
   fetchMoviesrecommendedforyou,
   fetchpopularshows,
 } from "../reduxtoolkit/popularshows/popularslice";
+import { AppDispatch } from "../reduxtoolkit/store";
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -37,9 +37,14 @@ const responsive = {
   },
 };
 
+export interface Main {
+  id: number;
+  moviename: string;
+  img: string;
+}
 const User = () => {
   const navigate = useNavigate();
-  const dispatch: any = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const [popups, setPopups] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [loader, setLoader] = useState<boolean>(false);
@@ -73,22 +78,13 @@ const User = () => {
     }, 10000);
   };
 
-  const handleNavigate = (id: number, main: {}) => {
+  const handleNavigate = (id: number, main: Main) => {
     authuser() ? navigate(`/${id}`, { state: main }) : setPopup(true);
   };
 
-  const handlegate = (id: any) => {
+  const handlegate = () => {
     setPopups(true);
   };
-
-  // const handleloading = () => {
-  //   if (movie.length < 10) {
-  //     setLoading(false)
-  //   }
-  //   else(movie.length > 10){
-  //     setLoading(true)
-  //   }
-  // }
 
   return (
     <>
@@ -103,9 +99,9 @@ const User = () => {
           <Carousel responsive={responsive}>
             {movie &&
               movie.length > 0 &&
-              movie.map((main: any) => {
+              movie.map((main: Main) => {
                 return (
-                  <div className="mt-5">
+                  <div className="mt-5" key={main.id}>
                     <Card
                       className="hov"
                       style={{
@@ -132,9 +128,9 @@ const User = () => {
             {loading &&
               popular &&
               popular.length > 0 &&
-              popular.map((mai: any) => {
+              popular.map((mai: Main) => {
                 return (
-                  <div className="mt-5">
+                  <div className="mt-5" key={mai.id}>
                     <Card
                       className="hov"
                       style={{
@@ -173,9 +169,9 @@ const User = () => {
             {loader &&
               fetchrecommendedforyou &&
               fetchrecommendedforyou.length > 0 &&
-              fetchrecommendedforyou.map((mai: any) => {
+              fetchrecommendedforyou.map((mai: Main) => {
                 return (
-                  <div className="mt-5">
+                  <div className="mt-5" key={mai.id}>
                     <Card
                       className="hov"
                       style={{
@@ -196,8 +192,8 @@ const User = () => {
               })}
           </Carousel>
         </div>
-        <div className="d-flex justify-content-center p-5">
-          <Button id="1" className="btn btn-danger" onClick={handlegate}>
+        <div className="d-flex flex-column mx-auto w-50 mt-5">
+          <Button id="1" className="btn btn-danger ms-2" onClick={handlegate}>
             Tamil
           </Button>
           <Button id="2" className="btn btn-primary ms-2" onClick={handlegate}>
@@ -212,6 +208,13 @@ const User = () => {
           <Button id="5" className="btn btn-danger ms-2" onClick={handlegate}>
             Malayalam
           </Button>
+        </div>
+        <div className="d-flex justify-content-center align-items-center mt-5">
+          <img
+            className="img-fluid"
+            width="90%"
+            src="https://img1.hotstarext.com/image/upload/f_auto,t_web_m_1x/sources/r1/cms/prod/7097/1317097-h-5ee0528a13d8"
+          />
         </div>
         <Button
           className="btn btn-danger w-50 d-flex justify-content-center mx-auto mt-5"

@@ -1,7 +1,15 @@
 import React from "react";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import Carosel from "./Carosel";
-
+import "./Extra.css";
+interface Para{
+  img:string;
+  content:string;
+  para:string;
+}
 const Extra = () => {
+  const navigate = useNavigate();
   const values = [
     {
       img: "https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/tv.png",
@@ -28,10 +36,18 @@ const Extra = () => {
   return (
     <>
       <Carosel />
+      <div className="d-flex justify-content-center align-items-center">
+        <Button
+          className="btn bg-black w-50 but"
+          onClick={() => navigate("/shows")}
+        >
+          Explore our Shows
+        </Button>
+      </div>
       <div className="container">
         <div className="bg-black text-white row">
           {values &&
-            values.map((main: any) => {
+            values.map((main: Para) => {
               return (
                 <>
                   <div className="col-lg-6">
